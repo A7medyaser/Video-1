@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<title>Habkan — Brand Film</title>
+<style>
+@font-face{font-family:Alx;font-weight:300;src:url(../fonts/Alexandria-Light.ttf)}
+@font-face{font-family:Alx;font-weight:500;src:url(../fonts/Alexandria-Medium.ttf)}
+@font-face{font-family:Alx;font-weight:700;src:url(../fonts/Alexandria-Bold.ttf)}
+@font-face{font-family:Alx;font-weight:900;src:url(../fonts/Alexandria-Black.ttf)}
+@font-face{font-family:SG;font-weight:500;src:url(../fonts/SpaceGrotesk-Medium.ttf)}
+@font-face{font-family:SG;font-weight:700;src:url(../fonts/SpaceGrotesk-Bold.ttf)}
+:root{--ink:#0F0E13;--ink2:#18161F;--ink3:#232030;--sand:#F4EBDD;--muted:#9A92A6;--saf:#FFB43C;--hen:#E9542B;--red:#FF5A5F;--green:#3DDC97}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--ink)}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--ink);font-family:Alx,sans-serif;color:var(--sand)}
+.abs{position:absolute}
+.scene{position:absolute;inset:0;display:none}
+.rtl{direction:rtl}
+.c{left:0;right:0;text-align:center}
+.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0.08em 0.04em 0.18em}
+.w>i{display:inline-block;font-style:normal;will-change:transform}
+.saf{background:linear-gradient(120deg,var(--saf),var(--hen));-webkit-background-clip:text;background-clip:text;color:transparent}
+.grad{background:linear-gradient(120deg,var(--saf),var(--hen))}
+#bg{position:absolute;inset:-80px;background:radial-gradient(1200px 800px at 50% 45%,#1d1a27 0%,var(--ink) 70%)}
+#pattern{position:absolute;inset:-200px;opacity:.05}
+#grain{position:absolute;inset:-200px;opacity:.07;mix-blend-mode:overlay;pointer-events:none}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55) 100%);pointer-events:none}
+#flash{position:absolute;inset:0;background:var(--sand);opacity:0;pointer-events:none}
+/* store mockup */
+#mock{left:150px;top:200px;width:1000px;height:640px;border-radius:22px;background:#FBF7F1;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.55);color:#2A2433;transform-origin:50% 50%}
+#mock .bar{height:44px;background:#ECE5DB;display:flex;align-items:center;padding:0 18px;gap:8px}
+#mock .bar b{width:12px;height:12px;border-radius:50%;background:#d8cfc2}
+#mock .url{margin-left:20px;flex:0 0 380px;height:26px;border-radius:13px;background:#F8F3EC;font:500 14px SG;color:#8a8090;display:flex;align-items:center;padding:0 14px;direction:ltr}
+#mock .nav{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 36px;direction:rtl;border-bottom:1px solid #eee5d8}
+#mock .brand{font:900 30px Alx;color:#3B2F4A}
+#mock .links{display:flex;gap:28px;font:500 17px Alx;color:#6b6175}
+#mock .cart{position:relative;width:44px;height:44px;border-radius:12px;background:#F1EAE0;display:grid;place-items:center}
+#mock .badge{position:absolute;top:-8px;left:-8px;min-width:26px;height:26px;border-radius:13px;background:var(--hen);color:#fff;font:700 14px Alx;display:grid;place-items:center;padding:0 6px}
+#mock .hero{margin:22px 36px 0;height:200px;border-radius:18px;background:linear-gradient(135deg,#3B2F4A,#5B4470);position:relative;overflow:hidden;direction:rtl;padding:36px 44px;color:#F6EEE3}
+#mock .hero h3{font:900 40px Alx}
+#mock .hero p{font:300 18px Alx;opacity:.8;margin-top:8px}
+#mock .hero .btn{position:absolute;bottom:32px;right:44px;height:44px;padding:0 26px;border-radius:22px;background:#F6EEE3;color:#3B2F4A;font:700 16px Alx;display:grid;place-items:center}
+#mock .hero .ship{position:absolute;top:0;left:0;right:0;height:34px;background:var(--saf);color:#3B2F4A;font:700 15px Alx;display:grid;place-items:center;opacity:0}
+#mock .grid{display:flex;gap:22px;margin:22px 36px;direction:rtl}
+#mock .card{flex:1;height:270px;border-radius:16px;background:#fff;border:1px solid #efe6da;position:relative;overflow:hidden;padding:12px}
+#mock .card .img{height:150px;border-radius:12px;background:#F4EDE3;display:grid;place-items:center}
+#mock .card .nm{font:700 17px Alx;margin-top:12px;direction:rtl}
+#mock .card .pr{font:500 15px Alx;color:#7a6f84;direction:rtl;margin-top:4px}
+#mock .card .stars{position:absolute;left:14px;bottom:44px;color:var(--saf);font-size:15px;letter-spacing:1px;opacity:0}
+#mock .card .add{position:absolute;left:12px;right:12px;bottom:10px;height:0;border-radius:10px;background:linear-gradient(120deg,var(--saf),var(--hen));color:#fff;font:700 14px Alx;display:grid;place-items:center;overflow:hidden}
+#mock .card .tag{position:absolute;top:20px;right:20px;padding:4px 10px;border-radius:8px;background:var(--hen);color:#fff;font:700 12px Alx;opacity:0}
+#statbar{left:150px;top:868px;width:1000px;display:flex;gap:22px;direction:rtl}
+.stat{flex:1;height:96px;border-radius:18px;background:var(--ink2);border:1px solid #2a2635;padding:16px 24px;display:flex;flex-direction:column;justify-content:center}
+.stat small{font:500 16px Alx;color:var(--muted)}
+.stat b{font:900 34px Alx;margin-top:2px}
+.cursor{width:34px;height:34px}
+/* notifications */
+.notif{position:absolute;right:120px;width:560px;height:96px;border-radius:20px;background:rgba(30,27,40,.92);border:1px solid #393349;backdrop-filter:blur(8px);display:flex;align-items:center;gap:18px;padding:0 22px;direction:rtl;box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.notif .ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--saf),var(--hen));flex:none}
+.notif .tx{flex:1}
+.notif .tx b{display:block;font:700 21px Alx}
+.notif .tx span{font:300 16px Alx;color:var(--muted)}
+.notif .amt{font:900 22px Alx;color:var(--green)}
+/* pillars */
+.pillar{position:absolute;top:250px;width:470px;height:560px;border-radius:28px;background:linear-gradient(180deg,#1c1925,#141219);border:1px solid #2c2838;padding:40px 38px;direction:rtl;overflow:hidden}
+.pillar .num{font:700 22px SG;color:var(--muted);letter-spacing:2px}
+.pillar h4{font:900 42px Alx;white-space:nowrap;margin-top:14px}
+.pillar .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{padding:8px 16px;border-radius:12px;background:#24202f;border:1px solid #363045;font:500 17px Alx;color:#d9d0e2}
+.pillar .vis{direction:ltr;position:absolute;left:38px;right:38px;bottom:36px;height:190px}
+/* journey */
+.node{position:absolute;width:150px;margin-left:-75px;text-align:center;direction:rtl}
+.node .dot{width:64px;height:64px;margin:0 auto;border-radius:50%;background:var(--ink2);border:3px solid #3a3448;display:grid;place-items:center;font:700 22px SG;color:var(--muted)}
+.node .lb{margin-top:20px;font:700 24px Alx;color:var(--muted);white-space:nowrap}
+/* services */
+.svc{position:absolute;height:150px;display:flex;align-items:center;gap:30px;direction:rtl}
+.svc .ico{width:120px;height:120px;border-radius:30px;display:grid;place-items:center;background:var(--ink2);border:1px solid #2f2a3b}
+.svc .t{font:900 92px Alx}
+.plat{position:absolute;height:110px;border-radius:55px;padding:0 46px;display:flex;align-items:center;gap:18px;font:900 46px Alx;border:2px solid}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg"></div>
+  <svg id="pattern" width="2320" height="1480"><defs><pattern id="pt" width="120" height="120" patternUnits="userSpaceOnUse"><g fill="none" stroke="#F4EBDD" stroke-width="1.5"><rect x="35" y="35" width="50" height="50"/><rect x="35" y="35" width="50" height="50" transform="rotate(45 60 60)"/><path d="M0 60H25M95 60H120M60 0V25M60 95V120"/></g></pattern></defs><rect width="100%" height="100%" fill="url(#pt)"/></svg>
+
+  <!-- ============ S1/S2/S3/S8 : store mockup ============ -->
+  <div class="scene" id="sStore">
+    <div id="mock" class="abs">
+      <div class="bar"><b></b><b></b><b></b><div class="url">lian-store.sa</div></div>
+      <div class="nav"><div class="brand">ليان</div><div class="links"><span>الرئيسية</span><span>العطور</span><span>الهدايا</span><span>العروض</span></div>
+        <div class="cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B2F4A" stroke-width="2"><path d="M5 7h14l-1.5 12h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><div class="badge" id="cartN">0</div></div></div>
+      <div class="hero"><div class="ship" id="ship">شحن مجاني فوق 200 ر.س — يصلك خلال 24 ساعة</div><h3 id="heroH">عطور تُشبهك</h3><p id="heroP">تشكيلة جديدة من أفخم الروائح الشرقية</p><div class="btn" id="heroBtn">تسوّق الآن</div></div>
+      <div class="grid" id="cards"></div>
+    </div>
+    <div id="statbar" class="abs">
+      <div class="stat"><small>الزيارات</small><b id="stVisits">0</b></div>
+      <div class="stat"><small>أضيف للسلة</small><b id="stCart">0</b></div>
+      <div class="stat"><small>الطلبات</small><b id="stOrders">0</b></div>
+    </div>
+    <svg class="abs cursor" id="cursor" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="#fff" stroke="#111" stroke-width="1.2"/></svg>
+    <div id="notifs"></div>
+  </div>
+
+  <!-- side text for store scenes -->
+  <div class="scene" id="sStoreText">
+    <svg class="abs" style="left:0;top:0" width="1920" height="1080"><path id="introLine" d="M1920,540 L760,540" fill="none" stroke="url(#gS)" stroke-width="4" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/><rect id="introKnot" x="-14" y="-14" width="28" height="28" fill="url(#gS2)"/></svg>
+    <div class="abs rtl" id="t1a" style="right:150px;top:300px;width:620px;font:900 120px Alx;line-height:1.1">ليان…</div>
+    <div class="abs rtl" id="t1b" style="right:150px;top:450px;width:620px;font:500 52px Alx;line-height:1.3">افتتحت متجرها الأول.</div>
+    <div class="abs rtl" id="t1c" style="right:150px;top:600px;width:620px;font:700 44px Alx;display:flex;align-items:center;gap:18px"><span class="ck"></span>تصميمٌ أنيق</div>
+    <div class="abs rtl" id="t1d" style="right:150px;top:680px;width:620px;font:700 44px Alx;display:flex;align-items:center;gap:18px"><span class="ck"></span>منتجاتٌ رائعة</div>
+    <div class="abs rtl" id="t2a" style="right:150px;top:330px;width:620px;font:500 64px Alx">لكن…</div>
+    <div class="abs rtl" id="t2b" style="right:150px;top:430px;width:640px;font:900 104px Alx;line-height:1.12">لا أحد<br>يشتري.</div>
+    <div class="abs c rtl" id="t8a" style="top:300px;font:500 60px Alx">وبعد</div>
+    <div class="abs c rtl" id="t8b" style="top:390px;font:900 220px Alx;line-height:1.1"><span id="days">1</span> <span style="font-size:96px;font-weight:700">يومًا…</span></div>
+    <div class="abs c rtl" id="t8c" style="top:70px;font:900 96px Alx">تغيّرت <span class="saf">القصة.</span></div>
+  </div>
+
+  <!-- ============ S3 : the plot ============ -->
+  <div class="scene" id="sPlot">
+    <div class="abs c rtl" id="t3a" style="top:330px;font:500 64px Alx">المشكلة لم تكن في الشكل…</div>
+    <div class="abs c rtl" id="t3b" style="top:420px;font:900 150px Alx">كانت في <span class="saf">الحَبْكة.</span></div>
+    <svg class="abs" id="plotLine" style="left:0;top:0" width="1920" height="1080"><path id="plotPath" d="" fill="none" stroke="url(#gS)" stroke-width="8" stroke-linecap="round"/></svg>
+  </div>
+
+  <!-- ============ S4/S10 : logo ============ -->
+  <div class="scene" id="sLogo">
+    <svg class="abs" id="logoSvg" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080">
+      <defs id="logoDefs"></defs>
+      <g id="threads"></g>
+      <g id="knotWrap"><g id="knotDraw"></g><g id="knotFinal"></g></g>
+      <g id="wmWrap"></g>
+    </svg>
+    <div class="abs c rtl" id="t4a" style="top:110px;font:500 46px Alx;color:var(--muted)">هنا… يبدأ</div>
+    <div class="abs c" id="latin" style="top:850px;font:700 34px SG;letter-spacing:26px;color:var(--muted)">HABKAN</div>
+    <div class="abs c rtl" id="t10a" style="top:780px;font:500 54px Alx">لا نصمّم متجرًا فقط.</div>
+    <div class="abs c rtl" id="t10b" style="top:860px;font:900 84px Alx">نبني متجرًا… <span class="saf">يبيع.</span></div>
+    <div class="abs c rtl" id="t10c" style="top:800px;font:700 50px Alx;color:var(--sand)">متجرٌ محبوك… <span class="saf">يبيع.</span></div>
+    <div class="abs c rtl" id="t10d" style="top:900px;font:500 26px Alx;color:var(--muted);word-spacing:6px">تصميم · تطوير · إعادة بناء  —  سلّة · زد · Shopify</div>
+    <div class="abs c" id="t10e" style="top:960px;font:500 26px SG;color:var(--saf);letter-spacing:3px">@habkan</div>
+  </div>
+
+  <!-- ============ S5 : the question ============ -->
+  <div class="scene" id="sAsk">
+    <div id="swatches" class="abs" style="left:0;top:0;width:1920px;height:1080px"></div>
+    <div class="abs c" id="qmark" style="top:-60px;font:900 1100px Alx;color:transparent;-webkit-text-stroke:3px rgba(255,180,60,.13);line-height:1">؟</div>
+    <div class="abs c rtl" id="t5a" style="top:180px;font:500 60px Alx">لا نبدأ بالألوان…</div>
+    <div class="abs c rtl" id="t5b" style="top:270px;font:500 54px Alx;color:var(--muted)">نبدأ بسؤال:</div>
+    <div class="abs c rtl" id="t5c" style="top:380px;font:900 180px Alx">مَن سيشتري؟</div>
+    <div class="abs c rtl" id="t5d" style="top:620px;font:900 150px Alx"><span class="saf">ولماذا؟</span></div>
+  </div>
+
+  <!-- ============ S6 : three threads ============ -->
+  <div class="scene" id="sPillars">
+    <svg class="abs" id="pThreads" style="left:0;top:0" width="1920" height="1080"></svg>
+    <div class="pillar" id="p1" style="left:1290px"><div class="num">01</div><h4>نقرأ السوق</h4><div class="chips"><span class="chip">حجم الطلب</span><span class="chip">المواسم</span><span class="chip">شرائح الأسعار</span></div><svg class="vis" id="v1" viewBox="0 0 394 190"></svg></div>
+    <div class="pillar" id="p2" style="left:725px"><div class="num">02</div><h4>نحلّل المنافسين</h4><div class="chips"><span class="chip">العروض</span><span class="chip">التسعير</span><span class="chip">نقاط الضعف</span></div><svg class="vis" id="v2" viewBox="0 0 394 190"></svg></div>
+    <div class="pillar" id="p3" style="left:160px"><div class="num">03</div><h4>نفهم عميلك</h4><div class="chips"><span class="chip">مَن هو؟</span><span class="chip">ما الذي يقلقه؟</span><span class="chip saf" style="border-color:#6a4a2a">لماذا سيشتري؟</span></div><svg class="vis" id="v3" viewBox="0 0 394 190"></svg></div>
+    <div class="abs c rtl" id="t6a" style="top:880px;font:700 48px Alx">قبل أن نرسم <span class="saf">بكسلًا واحدًا.</span></div>
+    <div class="abs" id="pixel" style="width:22px;height:22px;background:var(--saf)"></div>
+  </div>
+
+  <!-- ============ S7 : weave into one system ============ -->
+  <div class="scene" id="sWeave">
+    <div class="abs c rtl" id="t7a" style="top:170px;font:500 54px Alx">ثم <span class="saf" style="font-weight:900">نَحبِك</span> كل ذلك</div>
+    <div class="abs c rtl" id="t7b" style="top:250px;font:900 96px Alx">في نظامٍ واحد يبيع</div>
+    <svg class="abs" id="braid" style="left:0;top:0" width="1920" height="1080"></svg>
+    <div id="nodes"></div>
+    <div class="abs" id="checkout" style="left:130px;top:770px;width:300px;height:76px;border-radius:38px;display:grid;place-items:center;font:900 30px Alx;color:#fff" class="grad">إتمام الطلب ✓</div>
+  </div>
+
+  <!-- ============ S9 : services + platforms ============ -->
+  <div class="scene" id="sServices">
+    <div class="svc" id="sv1" style="right:200px;top:200px"><div class="ico"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="url(#gS2)" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l4 7-4 13-4-13z"/><circle cx="12" cy="10" r="1.6"/></svg></div><div class="t">تصميم</div></div>
+    <div class="svc" id="sv2" style="right:200px;top:400px"><div class="ico"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="url(#gS2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></div><div class="t">تطوير</div></div>
+    <div class="svc" id="sv3" style="right:200px;top:600px"><div class="ico"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="url(#gS2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.9-3M4 4v4h4M4 13a8 8 0 0 0 14.9 3M20 20v-4h-4"/></svg></div><div class="t">إعادة بناء</div></div>
+    <div class="abs rtl" id="t9a" style="left:170px;top:230px;width:620px;text-align:right;font:500 50px Alx;color:var(--muted)">متاجر</div>
+    <div class="plat" id="pl1" style="left:370px;top:330px;color:#BAF3E6;border-color:#2c6b63;background:rgba(0,73,86,.35)">سلّة</div>
+    <div class="plat" id="pl2" style="left:370px;top:480px;color:#d8c2f5;border-color:#5E2F91;background:rgba(94,47,145,.28)">زد</div>
+    <div class="plat" id="pl3" style="left:370px;top:630px;color:#c9e59a;border-color:#5e8a2b;background:rgba(149,191,71,.18);font-family:SG;font-weight:700">Shopify</div>
+  </div>
+
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <linearGradient id="gS" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1920" y2="0"><stop offset="0" stop-color="#E9542B"/><stop offset=".5" stop-color="#FFB43C"/><stop offset="1" stop-color="#E9542B"/></linearGradient>
+    <linearGradient id="gS2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFB43C"/><stop offset="1" stop-color="#E9542B"/></linearGradient>
+  </defs></svg>
+
+  <canvas id="grain" width="1024" height="1024"></canvas>
+  <div id="vig"></div>
+  <div id="flash"></div>
+</div>
+<script src="logo-parts.js"></script>
+<script src="film.js"></script>
+</body>
+</html>
