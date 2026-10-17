@@ -1,3 +1,4 @@
 tools/node_modules/
 scratch/
 audio/*.wav
+!audio/vo2_final.wav
